@@ -130,6 +130,11 @@ module.exports = function makeWebpackConfig(options) {
     {
       test: /\.json$/,
       loader: "json-loader"
+    },
+    {
+      // Allow us to load CSV files as strings.
+      test: /\.csv$/,
+      loader: "raw-loader"
     }
   ]}
 
