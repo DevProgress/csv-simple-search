@@ -18,3 +18,4 @@
 
 - all source files are in `/src`
 - CSS can be added by: `import 'filename.css'`. They will be automatically included in the index.html file with appropriate vendor prefixes added (so no need to add your own)
+- @alexyaseen is happy to answer any React or ES6 questions
