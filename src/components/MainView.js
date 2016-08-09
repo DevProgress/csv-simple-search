@@ -33,19 +33,19 @@ export default class MainView extends React.Component {
   }
 
   export(json) {
-    let csv  = Papa.unparse(json),
-        blob = new Blob([csv], {type: 'text/csv'}),
-        url  = window.URL.createObjectURL(blob),
-        link = document.createElement('a'),
-        evt  = document.createEvent('MouseEvents');
-
-    link.setAttribute('href', url);
-    link.setAttribute('target', '_blank');
-    link.setAttribute('download', 'data.csv');
-
-    evt.initMouseEvent('click', true, true, document.defaultView, 1, 0, 0, 0, 0,
-      false, false, false, false, 0, null);
-    link.dispatchEvent(evt);
+    var csv = Papa.unparse(json);
+    var blob = new Blob([csv], {type: 'text/csv'});
+    if (window.navigator.msSaveOrOpenBlob)  // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+      window.navigator.msSaveBlob(blob, "filename.csv");
+    else
+    {
+      var a = window.document.createElement("a");
+      a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
+      a.download = "filename.csv";
+      document.body.appendChild(a);
+      a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+      document.body.removeChild(a);
+    }    
   }
 
   filterData(data) {
