@@ -1,4 +1,38 @@
-html, body, #main-view {
+html, body {
   height: 100%;
   width: 100%;
+}
+
+body {
+  background: #FAFAFA;
+  font-family: "Source Sans Pro";
+}
+
+
+#main-view {
+  padding: 150px 0 50px;
+}
+
+.table {
+  background: #fff;
+}
+
+.pager li a {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.navbar {
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  margin: 0;
+}
+
+.navbar-brand {
+  height: 80px;
+}
+
+.navbar-brand img {
+  height: 100%;
+  width: auto;
 }

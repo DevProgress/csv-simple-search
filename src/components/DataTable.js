@@ -38,7 +38,7 @@ export default class DataTable extends React.Component {
 
     return (
       <div>
-        <table>
+        <table className="table table-responsive table-bordered">
           <thead>
             <tr>
               {columns.map((col, i) => <th key={i}>{col}</th>)}
@@ -54,11 +54,10 @@ export default class DataTable extends React.Component {
           </tbody>
         </table>
 
-        <div className="pager">
-          <a onClick={this.prevPage.bind(this)}>&larr;</a>
-
-          <a onClick={this.nextPage.bind(this)}>&rarr;</a>
-        </div>
+        <ul className="pager">
+          <li><a onClick={this.prevPage.bind(this)}>Previous</a></li>
+          <li><a onClick={this.nextPage.bind(this)}>Next</a></li>
+        </ul>
       </div>
     )
   }
