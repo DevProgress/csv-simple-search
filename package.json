@@ -2,10 +2,10 @@
   "name": "csv-simple-search",
   "version": "1.0.0",
   "description": "Searchable, exportable CSV viewer",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.build.js --bail -p",
-    "dev": "webpack-dev-server --config webpack.config.js --history-api-fallback --hot --inline --progress",
+    "dev": "webpack & webpack-dev-server --config webpack.config.js --history-api-fallback --hot --inline --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,
