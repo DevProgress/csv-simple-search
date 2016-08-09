@@ -34,7 +34,7 @@ export default class DataTable extends React.Component {
         start = page * limit,
         end = start + limit,
         values  = props.values.slice(start, end),
-        columns = Object.keys(values[0]);
+        columns = Object.keys(values[0] || {});
 
     return (
       <div>
