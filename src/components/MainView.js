@@ -17,7 +17,7 @@ export default class MainView extends React.Component {
   }
 
   import(csv) {
-    var results = Papa.parse(csv, {
+    let results = Papa.parse(csv, {
       header: true,
       dynamicTyping: true
     });
@@ -29,12 +29,32 @@ export default class MainView extends React.Component {
     return results.data;
   }
 
+  export(json) {
+    let csv  = Papa.unparse(json),
+        blob = new Blob([csv], {type: 'text/csv'}),
+        url  = window.URL.createObjectURL(blob),
+        link = document.createElement('a'),
+        evt  = document.createEvent('MouseEvents');
+
+    link.setAttribute('href', url);
+    link.setAttribute('target', '_blank');
+    link.setAttribute('download', 'data.csv');
+
+    evt.initMouseEvent('click', true, true, document.defaultView, 1, 0, 0, 0, 0,
+      false, false, false, false, 0, null);
+    link.dispatchEvent(evt);
+  }
+
   render() {
+    let data = this.state.data;
+
     return (
       <div>
         Hello DevProgress!
 
-        <DataTable limit={20} values={this.state.data} />
+        <DataTable limit={20} values={data} />
+
+        <a onClick={this.export.bind(this, data)}>Export to CSV</a>
       </div>
     );
   }

@@ -9,14 +9,14 @@ export default class DataTable extends React.Component {
   }
 
   prevPage() {
-    var prev = this.state.page - 1;
+    let prev = this.state.page - 1;
     this.setState({
       page: prev < 0 ? 0 : prev
     });
   }
 
   nextPage() {
-    var props  = this.props,
+    let props  = this.props,
         limit  = props.limit,
         length = props.values.length,
         page = this.state.page,
@@ -28,7 +28,7 @@ export default class DataTable extends React.Component {
   }
 
   render() {
-    var props = this.props,
+    let props = this.props,
         limit = props.limit,
         page  = this.state.page,
         start = page * limit,
