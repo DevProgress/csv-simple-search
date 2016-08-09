@@ -1,6 +1,7 @@
 import React from 'react';
 import Papa  from 'papaparse';
 import DataTable from './DataTable';
+import Search from './Search'
 import '../styles.css';
 import csvdata from '../../data/csv-simple-search-sample-data.csv';
 
@@ -11,8 +12,10 @@ const propTypes = {
 export default class MainView extends React.Component {
   constructor(props) {
     super(props);
+    const data = this.import(csvdata);
     this.state = {
-      data: this.import(csvdata)
+      data: data,
+      filteredData: data
     };
   }
 
@@ -45,16 +48,23 @@ export default class MainView extends React.Component {
     link.dispatchEvent(evt);
   }
 
+  filterData(data) {
+    this.setState({
+      filteredData: data
+    });
+  }
+
   render() {
-    let data = this.state.data;
+    const data = this.state.data;
+    const filteredData = this.state.filteredData;
 
     return (
       <div>
-        Hello DevProgress!
+        <Search data={data} onFilteredData={this.filterData.bind(this)} />
 
-        <DataTable limit={20} values={data} />
+        <DataTable limit={20} values={filteredData} />
 
-        <a onClick={this.export.bind(this, data)}>Export to CSV</a>
+        <a onClick={this.export.bind(this, filteredData)}>Export to CSV</a>
       </div>
     );
   }
