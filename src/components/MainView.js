@@ -33,19 +33,19 @@ export default class MainView extends React.Component {
   }
 
   export(json) {
-    let csv  = Papa.unparse(json),
-        blob = new Blob([csv], {type: 'text/csv'}),
-        url  = window.URL.createObjectURL(blob),
-        link = document.createElement('a'),
-        evt  = document.createEvent('MouseEvents');
-
-    link.setAttribute('href', url);
-    link.setAttribute('target', '_blank');
-    link.setAttribute('download', 'data.csv');
-
-    evt.initMouseEvent('click', true, true, document.defaultView, 1, 0, 0, 0, 0,
-      false, false, false, false, 0, null);
-    link.dispatchEvent(evt);
+    const filename = "data.csv",
+        csv = Papa.unparse(json),
+        blob = new Blob([csv], {type: 'text/csv'});
+    if (window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveBlob(blob, filename);
+    } else {
+      const a = window.document.createElement("a");
+      a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }    
   }
 
   filterData(data) {
