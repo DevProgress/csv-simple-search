@@ -45,7 +45,7 @@ export default class MainView extends React.Component {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    }    
+    }
   }
 
   filterData(data) {
@@ -61,19 +61,17 @@ export default class MainView extends React.Component {
     return (
       <div>
         <div className="row">
-          <div className="col-xs-12 col-sm-4">
+          <div className="col-xs-8 col-sm-4">
             <Search data={data} onFilteredData={this.filterData.bind(this)} />
+          </div>
+          <div className="col-xs-4 pull-right">
+            <a className="btn btn-primary pull-right" onClick={this.export.bind(this, filteredData)}>Export to CSV</a>
           </div>
         </div>
         <hr/>
         <div className="row">
           <div className="col-xs-12">
             <DataTable limit={20} values={filteredData} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12">
-            <a className="btn btn-primary" onClick={this.export.bind(this, filteredData)}>Export to CSV</a>
           </div>
         </div>
       </div>
