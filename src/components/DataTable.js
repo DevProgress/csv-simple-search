@@ -26,7 +26,8 @@ export default class DataTable extends React.Component {
   setWide() {
     const columnCount = Object.keys(this.props.values[0] || {}).length;
     const windowWidth = window.innerWidth;
-    if (columnCount * 100 < windowWidth) {
+    const standardColumnWidth = 100
+    if (columnCount * standardColumnWidth < windowWidth) {
       this.setState({
         wide: true
       });
