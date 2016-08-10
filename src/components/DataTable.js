@@ -52,12 +52,13 @@ export default class DataTable extends React.Component {
         next = page + 1;
 
     this.setState({
-      page: next > Math.ceil(length / limit) ? page : next
+      page: next >= Math.ceil(length / limit) ? page : next
     });
   }
 
   render() {
     let props = this.props,
+        length = props.values.length,
         limit = props.limit,
         page  = this.state.page,
         start = page * limit,
@@ -89,8 +90,12 @@ export default class DataTable extends React.Component {
         </table>
 
         <ul className="pager">
-          <li><a onClick={this.prevPage.bind(this)}>Previous</a></li>
-          <li><a onClick={this.nextPage.bind(this)}>Next</a></li>
+          <li className={page === 0 ? 'disabled' : ''}>
+            <a onClick={this.prevPage.bind(this)}>Previous</a>
+          </li>
+          <li className={page + 1 >= Math.ceil(length / limit) ? 'disabled' : 0}>
+            <a onClick={this.nextPage.bind(this)}>Next</a>
+          </li>
         </ul>
       </div>
     )
