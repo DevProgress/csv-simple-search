@@ -33,7 +33,7 @@ export default class MainView extends React.Component {
       fileName = decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-    const path = '/csv/' + fileName;
+    const path = './csv/' + fileName;
     Papa.parse(path, {
         download: true,
         header: true,
