@@ -1,11 +1,40 @@
 import React from 'react';
+import styles from './DataTable.css';
 
 export default class DataTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 0
+      page: 0,
+      wide: false
     };
+  }
+
+  componentDidMount() {
+    this.setWide();
+    window.addEventListener('resize', this.setWide.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setWide);
+  }
+
+  componentDidRecieveProps() {
+    this.setWide();
+  }
+
+  setWide() {
+    const columnCount = Object.keys(this.props.values[0] || {}).length;
+    const windowWidth = window.innerWidth;
+    if (columnCount * 100 < windowWidth) {
+      this.setState({
+        wide: true
+      });
+    } else {
+      this.setState({
+        wide: false
+      });
+    }
   }
 
   prevPage() {
@@ -34,21 +63,26 @@ export default class DataTable extends React.Component {
         start = page * limit,
         end = start + limit,
         values  = props.values.slice(start, end),
-        columns = Object.keys(values[0] || {});
+        columns = Object.keys(values[0] || {}),
+        wide = this.state.wide;
 
     return (
       <div>
-        <table className="table table-responsive table-bordered">
-          <thead>
-            <tr>
-              {columns.map((col, i) => <th key={i}>{col}</th>)}
-            </tr>
-          </thead>
+        <table className={'table table-responsive table-bordered ' + (wide ? styles.wide : styles.narrow)}>
+          {(() => {
+            if (wide) {
+              return <thead>
+                <tr>
+                  {columns.map((col, i) => <th key={i}>{col}</th>)}
+                </tr>
+              </thead>;
+            }
+          })()}
 
           <tbody>
             {values.map((val, i) => (
               <tr key={i}>
-                {columns.map((col, j) => <td key={j}>{val[col]}</td>)}
+                {columns.map((col, j) => <td key={j}>{wide ? '' : col + ':'} {val[col]}</td>)}
               </tr>
             ))}
           </tbody>
