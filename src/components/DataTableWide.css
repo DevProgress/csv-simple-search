@@ -1,0 +1,5 @@
+table#DataTable td {
+	border-bottom: 1px dotted; /* this is the border between cells; restyle at will */
+	border-top: 1px dotted; /* this is the border between cells; restyle at will */
+	width: auto; /* restyle at will */
+}
