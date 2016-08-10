@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "babel-polyfill": "^6.9.1",
+    "bootstrap": "^3.3.7",
     "lodash": "^4.14.2",
     "normalize.css": "^4.1.1",
     "papaparse": "^4.1.2",
