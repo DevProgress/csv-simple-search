@@ -53,7 +53,6 @@ export default class MainView extends React.Component {
       data: results.data,
       filteredData: results.data
     });
-    this.render();
   }
 
   export(json) {
