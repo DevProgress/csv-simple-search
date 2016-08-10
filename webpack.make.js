@@ -4,6 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const WebpackCleanPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /**
  * Make webpack config
@@ -203,6 +204,10 @@ module.exports = function makeWebpackConfig(options) {
     new webpack.NoErrorsPlugin(),
 
     new WebpackNotifierPlugin(),
+
+    new CopyWebpackPlugin([
+        { from: './src/csv', to: './csv' },
+    ]),
 
     // Reference: https://github.com/webpack/extract-text-webpack-plugin
     // Extract css files
