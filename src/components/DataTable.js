@@ -83,7 +83,7 @@ export default class DataTable extends React.Component {
           <tbody>
             {values.map((val, i) => (
               <tr key={i}>
-                {columns.map((col, j) => <td key={j}><span>{wide ? '' : col + ':'}</span> {val[col]}</td>)}
+                {columns.map((col, j) => <td key={j}>{wide ? '' : <span>{col + ':'}</span>} {val[col]}</td>)}
               </tr>
             ))}
           </tbody>
