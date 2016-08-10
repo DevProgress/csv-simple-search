@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './DataTable.css';
 
 export default class DataTable extends React.Component {
   constructor(props) {
@@ -67,7 +68,7 @@ export default class DataTable extends React.Component {
 
     return (
       <div>
-        <table id="DataTable">
+        <table className={wide ? styles.wide : styles.narrow}>
           {(() => {
             if (wide) {
               return <thead>

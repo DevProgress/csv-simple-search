@@ -1,13 +1,19 @@
-table#DataTable {
+:local(.narrow) {
 	border-collapse: collapse;  /* this is required for the narrow table */
 	width: 100%; /* this is required for the narrow table */
 }
-table#DataTable td {
+:local(.narrow) td {
 	display: block; /* this is required for the narrow table */
 	width: 100%; /* this is required for the narrow table */
 	height: auto; /* restyle at will */
 	border: none; /* restyle at will */
 }
-table#DataTable td:nth-child(1) {
+:local(.narrow) td:nth-child(1) {
 	border-top: 1px dotted; /* this is the border between cells; restyle at will */
+}
+
+:local(.wide) td {
+	border-bottom: 1px dotted; /* this is the border between cells; restyle at will */
+	border-top: 1px dotted; /* this is the border between cells; restyle at will */
+	width: auto; /* restyle at will */
 }
