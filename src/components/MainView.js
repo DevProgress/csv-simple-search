@@ -50,6 +50,7 @@ export default class MainView extends React.Component {
 
   parseCSV(results) {
     this.setState({
+      data: results.data,
       filteredData: results.data
     });
   }
