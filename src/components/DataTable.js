@@ -69,7 +69,7 @@ export default class DataTable extends React.Component {
 
     return (
       <div>
-        <table className={'table table-responsive table-bordered ' + (wide ? styles.wide : styles.narrow)}>
+        <table className={'table table-responsive ' + (wide ? styles.wide : styles.narrow)}>
           {(() => {
             if (wide) {
               return <thead>
@@ -83,7 +83,7 @@ export default class DataTable extends React.Component {
           <tbody>
             {values.map((val, i) => (
               <tr key={i}>
-                {columns.map((col, j) => <td key={j}>{wide ? '' : col + ':'} {val[col]}</td>)}
+                {columns.map((col, j) => <td key={j}><span>{wide ? '' : col + ':'}</span> {val[col]}</td>)}
               </tr>
             ))}
           </tbody>

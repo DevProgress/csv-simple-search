@@ -17,6 +17,12 @@ body {
   background: #fff;
 }
 
+.table-responsive tr td span {
+  
+}
+.table-responsive {
+  border: none;
+}
 .pager li a {
   cursor: pointer;
   display: inline-block;
