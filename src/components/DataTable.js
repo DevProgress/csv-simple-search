@@ -38,7 +38,7 @@ export default class DataTable extends React.Component {
 
     return (
       <div>
-        <table>
+        <table id="DataTable">
           <thead>
             <tr>
               {columns.map((col, i) => <th key={i}>{col}</th>)}
