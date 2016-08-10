@@ -20,7 +20,6 @@ export default class MainView extends React.Component {
   }
 
   componentDidMount(){
-    console.log('componentDidMount');
     this.import();
   }
 
