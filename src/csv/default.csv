@@ -1,5 +1,27 @@
-State,City,Type,Name,Diversity,Website,Phone #,Source
-NY,New York,Open Source Community,DevProgress,MBE Certified,"http://devprogress.us
-",(555)555-5555,DevProgress.us
-NV,Las Vegas,Catering,Lucky's Tasty Viddles,,http://luckystastyviddl.es,(777)777-7777,DNC
-NC,Raleigh,Flowers,Rollywood Florists,MBE Certfied,http://RollywoodFlowers.com,(123)456-7890,HfA
+"State","City","Type","Name","Diversity","Website","Phone #","Source"
+"NY","New York","Open Source Community","DevProgress","MBE Certified","http://devprogress.us","(555)555-5555","DevProgress.us"
+"NV","Las Vegas","Catering","Lucky's Tasty Viddles","☃","http://luckystastyviddl.es","(777)777-7777","DNC"
+"CA","Sacramento","Catering","Pizza Pie Guys","","http://pizzapieguys.pie","(213)424-7700","decause"
+"NC","Raleigh","Flowers","Rollywood Florists","MBE Certfied","http://RollywoodFlowers.com","(123)456-7890","HfA"
+"XX","CloudCity","LightSabers","Landoland","","http://lando.land","(999)999-9999","Han"
+"AA","AAA","AAAA","AAAAA","","http://aaa.aaa","(000)000-0000","aaaaaaa"
+"BB","BBB","BBBB","BBBBB","","http://bbb.bbb","(111)111-1111","bbbbbbb"
+"CC","CCC","CCCC","CCCCC","","http://ccc.ccc","(222)222-2222","ccccccc"
+"DD","DDD","DDDD","DDDDD","","http://ddd.ddd","(333)333-3333","ddddddd"
+"EE","EEE","EEEE","EEEEE","","http://eee.eee","(444)444-4444","eeeeeee"
+"FF","FFF","FFFF","FFFFF","","http://fff.fff","(555)555-5555","fffffff"
+"GG","GGG","GGGG","GGGGG","","http://ggg.ggg","(707)707-7007","ggggggg"
+"HH","HHH","HHHH","HHHHH","","http://hhh.hhh","(101)111-1111","hhhhhhh"
+"II","III","IIII","IIIII","","http://iii.iii","(110)111-1111","iiiiiii"
+"JJ","JJJ","JJJJ","JJJJJ","","http://jjj.jjj","(011)011-1111","jjjjjjj"
+"KK","KKK","KKKK","KKKKK","","http://okk.okk","(101)101-1111","kkkkkkk"
+"LL","LLL","LLLL","LLLLL","","http://lll.lll","(110)110-1111","lllllll"
+"MM","MMM","MMMM","MMMMM","","http://mmm.mmm","(101)011-0111","mmmmmmm"
+"NN","NNN","NNNN","NNNNN","","http://nnn.nnn","(011)101-1011","nnnnnnn"
+"OO","OOO","OOOO","OOOOO","","http://ooo.ooo","(101)110-1101","ooooooo"
+"PP","PPP","PPPP","PPPPP","","http://ppp.ppp","(110)111-0110","ppppppp"
+"QQ","QQQ","QQQQ","QQQQQ","","http://qqq.qqq","(101)111-1001","qqqqqqq"
+"RR","RRR","RRRR","RRRRR","","http://rrr.rrr","(011)111-1001","rrrrrrr"
+"SS","SSS","SSSS","SSSSS","","http://sss.sss","(101)111-0110","sssssss"
+"TT","TTT","TTTT","TTTTT","","http://ttt.ttt","(110)110-1101","ttttttt"
+"UU","UUU","UUUU","UUUUU","","http://uuu.uuu","(101)101-1011","uuuuuuu"
