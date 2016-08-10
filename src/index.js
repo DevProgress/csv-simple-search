@@ -1,5 +1,7 @@
 import 'normalize.css';
 
+import 'bootstrap/dist/css/bootstrap.css'
+
 // https://babeljs.io/docs/usage/polyfill/
 import 'babel-polyfill';
 
