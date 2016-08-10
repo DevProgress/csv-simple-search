@@ -27,24 +27,24 @@ export default class MainView extends React.Component {
   import() {
     let fileName = 'default.csv';
     const param = 'file',
-      regex = new RegExp("[?&]" + param + "(=([^&#]*)|&|#|$)"), 
+      regex = new RegExp("[?&]" + param + "(=([^&#]*)|&|#|$)"),
       results = regex.exec(window.location.href);
     if (results) {
       fileName = decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-    const path = 'http://localhost:8080/csv/' + fileName;
+    const path = '/csv/' + fileName;
     Papa.parse(path, {
         download: true,
         header: true,
-        dynamicTyping: true,     
+        dynamicTyping: true,
         complete: function(results) {
           this.parseCSV(results);
         }.bind(this),
         error: function(err, file, inputElem, reason)
         {
           console.log(err);
-        },        
+        },
     });
   }
 
