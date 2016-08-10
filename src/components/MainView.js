@@ -60,11 +60,22 @@ export default class MainView extends React.Component {
 
     return (
       <div>
-        <Search data={data} onFilteredData={this.filterData.bind(this)} />
-
-        <DataTable limit={20} values={filteredData} />
-
-        <a onClick={this.export.bind(this, filteredData)}>Export to CSV</a>
+        <div className="row">
+          <div className="col-xs-12 col-sm-4">
+            <Search data={data} onFilteredData={this.filterData.bind(this)} />
+          </div>
+        </div>
+        <hr/>
+        <div className="row">
+          <div className="col-xs-12">
+            <DataTable limit={20} values={filteredData} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
+            <a className="btn btn-primary" onClick={this.export.bind(this, filteredData)}>Export to CSV</a>
+          </div>
+        </div>
       </div>
     );
   }

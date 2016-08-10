@@ -68,7 +68,7 @@ export default class DataTable extends React.Component {
 
     return (
       <div>
-        <table className={wide ? styles.wide : styles.narrow}>
+        <table className={'table table-responsive table-bordered ' + (wide ? styles.wide : styles.narrow)}>
           {(() => {
             if (wide) {
               return <thead>
@@ -88,11 +88,10 @@ export default class DataTable extends React.Component {
           </tbody>
         </table>
 
-        <div className="pager">
-          <a onClick={this.prevPage.bind(this)}>&larr;</a>
-
-          <a onClick={this.nextPage.bind(this)}>&rarr;</a>
-        </div>
+        <ul className="pager">
+          <li><a onClick={this.prevPage.bind(this)}>Previous</a></li>
+          <li><a onClick={this.nextPage.bind(this)}>Next</a></li>
+        </ul>
       </div>
     )
   }

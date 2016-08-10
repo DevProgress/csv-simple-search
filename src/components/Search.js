@@ -22,7 +22,7 @@ export default class Search extends React.Component {
 
   render() {
     return <div>
-      <input onChange={this.onChange.bind(this)} />
+      <input className="form-control" placeholder="Enter Zip Code" onChange={this.onChange.bind(this)} />
     </div>;
   }
 }
