@@ -4,6 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const WebpackCleanPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /**
  * Make webpack config
@@ -111,7 +112,7 @@ module.exports = function makeWebpackConfig(options) {
       // Rename the file using the asset hash
       // Pass along the updated reference to your code
       // You can add here any file extension you want to get copied to your output
-      test: /\.(ttf|eot|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      test: /\.(ttf|eot|otf|csv)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'file'
     },
     {
@@ -207,6 +208,10 @@ module.exports = function makeWebpackConfig(options) {
     new webpack.NoErrorsPlugin(),
 
     new WebpackNotifierPlugin(),
+
+    new CopyWebpackPlugin([
+        { from: './src/csv', to: './csv' },
+    ]),
 
     // Reference: https://github.com/webpack/extract-text-webpack-plugin
     // Extract css files

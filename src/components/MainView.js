@@ -3,43 +3,65 @@ import Papa  from 'papaparse';
 import DataTable from './DataTable';
 import Search from './Search'
 import '../styles.css';
-import csvdata from '../../data/csv-simple-search-sample-data.csv';
 
 const propTypes = {
 
 };
 
 export default class MainView extends React.Component {
+
   constructor(props) {
     super(props);
-    const data = this.import(csvdata);
+    let data = [];
     this.state = {
       data: data,
       filteredData: data
     };
   }
 
-  import(csv) {
-    let results = Papa.parse(csv, {
-      header: true,
-      dynamicTyping: true
-    });
+  componentDidMount(){
+    console.log('componentDidMount');
+    this.import();
+  }
 
-    if (results.errors.length) {
-      results.errors.forEach((err) => console.error(err));
+  import() {
+    let fileName = 'default.csv';
+    const param = 'file',
+      regex = new RegExp("[?&]" + param + "(=([^&#]*)|&|#|$)"), 
+      results = regex.exec(window.location.href);
+    if (results) {
+      fileName = decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-    return results.data;
+    const path = 'http://localhost:8080/csv/' + fileName;
+    Papa.parse(path, {
+        download: true,
+        header: true,
+        dynamicTyping: true,     
+        complete: function(results) {
+          this.parseCSV(results);
+        }.bind(this),
+        error: function(err, file, inputElem, reason)
+        {
+          console.log(err);
+        },        
+    });
+  }
+
+  parseCSV(results) {
+    this.setState({
+      filteredData: results.data
+    });
   }
 
   export(json) {
-    const filename = "data.csv",
+    let filename = "data.csv",
         csv = Papa.unparse(json),
         blob = new Blob([csv], {type: 'text/csv'});
     if (window.navigator.msSaveOrOpenBlob) {
       window.navigator.msSaveBlob(blob, filename);
     } else {
-      const a = window.document.createElement("a");
+      let a = window.document.createElement("a");
       a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
       a.download = filename;
       document.body.appendChild(a);
