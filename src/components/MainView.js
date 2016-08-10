@@ -1,5 +1,6 @@
 import React from 'react';
 import Papa  from 'papaparse';
+import Navbar from './Navbar';
 import DataTable from './DataTable';
 import Search from './Search'
 import '../styles.css';
@@ -81,20 +82,27 @@ export default class MainView extends React.Component {
 
     return (
       <div>
-        <div className="row">
-          <div className="col-xs-8 col-sm-4">
-            <Search data={data} onFilteredData={this.filterData.bind(this)} />
-          </div>
-          <div className="col-xs-4 pull-right">
-            <a className="btn btn-primary pull-right" onClick={this.export.bind(this, filteredData)}>Export to CSV</a>
-          </div>
-        </div>
-        <hr/>
-        <div className="row">
-          <div className="col-xs-12">
-            <DataTable limit={20} values={filteredData} />
-          </div>
-        </div>
+        <Navbar />
+    		<div className="container">
+    			<div className="row">
+    				<div className="col-sm-12">
+            <div className="row">
+              <div className="col-xs-8 col-sm-4">
+                <Search data={data} onFilteredData={this.filterData.bind(this)} />
+              </div>
+              <div className="col-xs-4 pull-right">
+                <a className="btn btn-primary pull-right" onClick={this.export.bind(this, filteredData)}>Export to CSV</a>
+              </div>
+            </div>
+            <hr/>
+            <div className="row">
+              <div className="col-xs-12">
+                <DataTable limit={20} values={filteredData} />
+              </div>
+            </div>
+    				</div>
+    			</div>
+    		</div>
       </div>
     );
   }

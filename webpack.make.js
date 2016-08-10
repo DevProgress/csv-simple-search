@@ -112,7 +112,7 @@ module.exports = function makeWebpackConfig(options) {
       // Rename the file using the asset hash
       // Pass along the updated reference to your code
       // You can add here any file extension you want to get copied to your output
-      test: /\.(ttf|eot|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      test: /\.(ttf|eot|otf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: 'file'
     },
     {
@@ -123,10 +123,6 @@ module.exports = function makeWebpackConfig(options) {
     {
       test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: "url-loader?limit=10000&mimetype=application/font-woff"
-    },
-    {
-        test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'svg-inline'
     },
     {
       test: /\.json$/,
