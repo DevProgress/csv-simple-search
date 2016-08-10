@@ -14,7 +14,7 @@
   	color: #999999;
 }
 :local(.narrow) td:nth-child(1) {
-	border-top: 2px solid #dddddd; /* this is the border between cells; restyle at will */
+	border-top: 2px solid #dddddd; /* this is the border between cells;*/
 }
 
 :local(.wide) td {
