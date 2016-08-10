@@ -4,8 +4,36 @@ export default class DataTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 0
+      page: 0,
+      wide: false
     };
+  }
+
+  componentDidMount() {
+    this.setWide();
+    window.addEventListener('resize', this.setWide.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setWide);
+  }
+
+  componentDidRecieveProps() {
+    this.setWide();
+  }
+
+  setWide() {
+    const columnCount = Object.keys(this.props.values[0] || {}).length;
+    const screenWidth = screen.width;
+    if (columnCount * 100 < screenWidth) {
+      this.setState({
+        wide: true
+      });
+    } else {
+      this.setState({
+        wide: false
+      });
+    }
   }
 
   prevPage() {
@@ -34,7 +62,8 @@ export default class DataTable extends React.Component {
         start = page * limit,
         end = start + limit,
         values  = props.values.slice(start, end),
-        columns = Object.keys(values[0] || {});
+        columns = Object.keys(values[0] || {}),
+        wide = this.state.wide;
 
     return (
       <div>
