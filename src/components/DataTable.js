@@ -11,26 +11,7 @@ export default class DataTable extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.setWide.bind(this));
-  }
-
-  propsDidChange() {
-    this.setWide();
-  }
-
-  setWide() {
-    const columnCount = Object.keys(this.props.values[0] || {}).length;
-    const windowWidth = window.innerWidth;
-    const standardColumnWidth = 100
-    if (columnCount * standardColumnWidth < windowWidth) {
-      this.setState({
-        wide: true
-      });
-    } else {
-      this.setState({
-        wide: false
-      });
-    }
+    window.addEventListener('resize', this.forceUpdate.bind(this));
   }
 
   prevPage() {
@@ -61,7 +42,8 @@ export default class DataTable extends React.Component {
         end = start + limit,
         values  = props.values.slice(start, end),
         columns = Object.keys(values[0] || {}),
-        wide = this.state.wide;
+        standardColumnWidth = 100,
+        wide = (columns.length * standardColumnWidth < window.innerWidth);
 
     return (
       <div>
