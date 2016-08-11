@@ -98,7 +98,7 @@ export default class MainView extends React.Component {
             <hr/>
             <div className="row">
               <div className="col-xs-12">
-                <DataTable limit={20} values={filteredData}/>
+                <DataTable limit={20} values={filteredData} />
               </div>
             </div>
     				</div>
