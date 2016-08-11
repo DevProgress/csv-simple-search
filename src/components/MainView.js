@@ -53,7 +53,6 @@ export default class MainView extends React.Component {
       data: results.data,
       filteredData: results.data
     });
-    this.refs.dataTable.setWide();
   }
 
   export(json) {
@@ -76,7 +75,6 @@ export default class MainView extends React.Component {
     this.setState({
       filteredData: data
     });
-    this.refs.dataTable.setWide();
   }
 
   render() {
@@ -100,7 +98,7 @@ export default class MainView extends React.Component {
             <hr/>
             <div className="row">
               <div className="col-xs-12">
-                <DataTable limit={20} values={filteredData} ref="dataTable"/>
+                <DataTable limit={20} values={filteredData}/>
               </div>
             </div>
     				</div>

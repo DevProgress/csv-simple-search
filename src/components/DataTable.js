@@ -11,15 +11,10 @@ export default class DataTable extends React.Component {
   }
 
   componentDidMount() {
-    this.setWide();
     window.addEventListener('resize', this.setWide.bind(this));
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.setWide);
-  }
-
-  componentDidRecieveProps() {
+  propsDidChange() {
     this.setWide();
   }
 
