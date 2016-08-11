@@ -11,11 +11,11 @@ export default class DataTable extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.forceUpdate.bind(this));
+    window.addEventListener('resize', () => this.forceUpdate())
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.setWide);
+    window.removeEventListener('resize', () => this.forceUpdate())
   }  
 
   prevPage() {
