@@ -5,6 +5,7 @@ import DataTable from './DataTable';
 import Search from './Search'
 import '../styles.css';
 
+
 const propTypes = {
 
 };
@@ -16,7 +17,9 @@ export default class MainView extends React.Component {
     let data = [];
     this.state = {
       data: data,
-      filteredData: data
+      filteredData: data,
+      dataSource: '',
+      isError: false
     };
   }
 
@@ -24,16 +27,43 @@ export default class MainView extends React.Component {
     this.import();
   }
 
-  import() {
-    let fileName = 'default.csv';
-    const param = 'file',
-      regex = new RegExp("[?&]" + param + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(window.location.href);
+  getQueryStringParam(name){
+    let value = null;
+    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+    const results = regex.exec(window.location.href);
     if (results) {
-      fileName = decodeURIComponent(results[2].replace(/\+/g, " "));
+      value = decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    return value;
+  }
+
+  getExternalFileUrl(){
+    return this.getQueryStringParam('externalFileUrl');
+  }  
+
+  getLocalFileName(){
+    let file = this.getQueryStringParam('file');
+    if (!file){
+      file = 'default.csv';
+    }
+    return file;
+  }
+
+  import() {
+
+    const localFolder = './csv/'
+    const localFileName = this.getLocalFileName();
+    let path = localFolder + localFileName;
+
+    const externalFileUrl = this.getExternalFileUrl();
+    if (externalFileUrl){
+      path = externalFileUrl;
     }
 
-    const path = './csv/' + fileName;
+    this.setState({
+      dataSource: path
+    });
+
     Papa.parse(path, {
         download: true,
         header: true,
@@ -43,8 +73,10 @@ export default class MainView extends React.Component {
         }.bind(this),
         error: function(err, file, inputElem, reason)
         {
-          console.log(err);
-        },
+          this.setState({
+            isError: true
+          });
+        }.bind(this),
     });
   }
 
@@ -78,13 +110,22 @@ export default class MainView extends React.Component {
   }
 
   render() {
-    const data = this.state.data;
-    const filteredData = this.state.filteredData;
-
+    const data = this.state.data,
+      filteredData = this.state.filteredData,
+      dataSource = encodeURI(this.state.dataSource),
+      isError = this.state.isError
+    
     return (
       <div>
         <Navbar />
     		<div className="container">
+          <div className={"row " + (isError ? '' : 'hidden')}>
+            <div className="col-sm-12">
+              <div className="alert alert-danger alert-dismissible" role="alert">
+                <strong>Oh snap!</strong> We had some issues resolving the data source <a className="wrap" href={dataSource}>{dataSource}</a>.
+              </div>  
+            </div>          
+          </div>
     			<div className="row">
     				<div className="col-sm-12">
             <div className="row">

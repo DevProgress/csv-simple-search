@@ -39,3 +39,7 @@ body {
   height: 100%;
   width: auto;
 }
+
+.wrap {
+  word-wrap: break-word;
+}
