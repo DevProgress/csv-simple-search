@@ -5,6 +5,7 @@ import DataTable from './DataTable';
 import Search from './Search'
 import '../styles.css';
 
+
 const propTypes = {
 
 };
@@ -16,7 +17,9 @@ export default class MainView extends React.Component {
     let data = [];
     this.state = {
       data: data,
-      filteredData: data
+      filteredData: data,
+      dataSource: '',
+      isError: false
     };
   }
 
@@ -40,8 +43,9 @@ export default class MainView extends React.Component {
 
   getLocalFileName(){
     let file = this.getQueryStringParam('file');
-    if (!file)
+    if (!file){
       file = 'default.csv';
+    }
     return file;
   }
 
@@ -52,8 +56,13 @@ export default class MainView extends React.Component {
     let path = localFolder + localFileName;
 
     const externalFileUrl = this.getExternalFileUrl();
-    if (externalFileUrl)
+    if (externalFileUrl){
       path = externalFileUrl;
+    }
+
+    this.setState({
+      dataSource: path
+    });
 
     Papa.parse(path, {
         download: true,
@@ -64,8 +73,10 @@ export default class MainView extends React.Component {
         }.bind(this),
         error: function(err, file, inputElem, reason)
         {
-          console.log(err);
-        },
+          this.setState({
+            isError: true
+          });
+        }.bind(this),
     });
   }
 
@@ -99,13 +110,22 @@ export default class MainView extends React.Component {
   }
 
   render() {
-    const data = this.state.data;
-    const filteredData = this.state.filteredData;
-
+    const data = this.state.data,
+      filteredData = this.state.filteredData,
+      dataSource = encodeURI(this.state.dataSource),
+      isError = this.state.isError
+    
     return (
       <div>
         <Navbar />
     		<div className="container">
+          <div className={"row " + (isError ? '' : 'hidden')}>
+            <div className="col-sm-12">
+              <div className="alert alert-danger alert-dismissible" role="alert">
+                <strong>Oh snap!</strong> We had some issues resolving the data source <a href={dataSource}>{dataSource}</a>.
+              </div>  
+            </div>          
+          </div>
     			<div className="row">
     				<div className="col-sm-12">
             <div className="row">
