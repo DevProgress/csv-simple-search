@@ -4,7 +4,7 @@
   "description": "Searchable, exportable CSV viewer",
   "main": "./src/index.js",
   "scripts": {
-    "build": "SET NODE_ENV=production && webpack --config webpack.build.js --bail -p",
+    "build": "webpack --config webpack.build.js --bail -p",
     "dev": "webpack & webpack-dev-server --config webpack.config.js --history-api-fallback --hot --inline --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
