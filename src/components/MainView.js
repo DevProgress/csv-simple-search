@@ -24,16 +24,37 @@ export default class MainView extends React.Component {
     this.import();
   }
 
-  import() {
-    let fileName = 'default.csv';
-    const param = 'file',
-      regex = new RegExp("[?&]" + param + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(window.location.href);
+  getQueryStringParam(name){
+    let value = null;
+    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+    const results = regex.exec(window.location.href);
     if (results) {
-      fileName = decodeURIComponent(results[2].replace(/\+/g, " "));
+      value = decodeURIComponent(results[2].replace(/\+/g, " "));
     }
+    return value;
+  }
 
-    const path = './csv/' + fileName;
+  getExternalFileUrl(){
+    return this.getQueryStringParam('externalFileUrl');
+  }  
+
+  getLocalFileName(){
+    let file = this.getQueryStringParam('file');
+    if (!file)
+      file = 'default.csv';
+    return file;
+  }
+
+  import() {
+
+    const localFolder = './csv/'
+    const localFileName = this.getLocalFileName();
+    let path = localFolder + localFileName;
+
+    const externalFileUrl = this.getExternalFileUrl();
+    if (externalFileUrl)
+      path = externalFileUrl;
+
     Papa.parse(path, {
         download: true,
         header: true,
