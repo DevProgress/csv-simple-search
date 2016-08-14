@@ -15,7 +15,7 @@ export default class Search extends React.Component {
     var value = e.target.value;
     this.props.onFilteredData(_.filter(this.props.data, function (row) {
       return _.find(_.values(row), function (val) {
-        return (val.toLowerCase()).indexOf(value.toLowerCase()) !== -1;
+        return (val.toString().toLowerCase()).indexOf(value.toLowerCase()) !== -1;
       });
     }));
   }
