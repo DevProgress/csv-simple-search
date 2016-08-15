@@ -118,7 +118,7 @@ export default class MainView extends React.Component {
     return (
       <div>
         <Navbar />
-    		<div className="container">
+    		<main className="container">
           <div className={"row " + (isError ? '' : 'hidden')}>
             <div className="col-sm-12">
               <div className="alert alert-danger alert-dismissible" role="alert">
@@ -144,7 +144,7 @@ export default class MainView extends React.Component {
             </div>
     				</div>
     			</div>
-    		</div>
+    		</main>
       </div>
     );
   }
