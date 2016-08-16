@@ -13,10 +13,14 @@ export default class Search extends React.Component {
 
   onChange(e) {
     var value = e.target.value;
+    var keywords = e.target.value.split(' ');
     this.props.onFilteredData(_.filter(this.props.data, function (row) {
-      return _.find(_.values(row), function (val) {
-        return (val.toString().toLowerCase()).indexOf(value.toLowerCase()) !== -1;
+      var values = _.values(row);
+      var words = _.join(values, ' ');
+      var matches = _.map(keywords, function(keyword){ 
+        return _.includes(words, keyword);
       });
+      return !(_.includes(matches, false));
     }));
   }
 
