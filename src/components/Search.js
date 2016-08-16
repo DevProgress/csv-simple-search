@@ -18,12 +18,7 @@ export default class Search extends React.Component {
     this.props.onFilteredData(_.filter(this.props.data, function (row) {
       const values = _.values(row);
       const words = _.join(values, ' ').toLowerCase();
-
-      const matches = _.map(keywords, function(keyword){ 
-        return _.includes(words, keyword);
-      });
-
-      return _.every(matches);
+      return _.every(keywords, keyword => _.includes(words, keyword))
     }));
   }
 
