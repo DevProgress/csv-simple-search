@@ -1,16 +1,16 @@
-var assert = require('assert');
+const assert = require('assert');
 
 describe('When loading', function() {
 
     it('should have the right title', function () {
         browser.url('/');
-        var title = browser.getTitle();
+        const title = browser.getTitle();
         assert(title === 'CSV Search');
     });
 
     it('should load local csv file', function () {
         browser.url('/?file=abc.csv');
-        var $table = browser.waitUntil(function(){
+        const $table = browser.waitUntil(function(){
             return !!browser.element('table').value;
         }, 10000);
         const rows = browser.elements('table tbody tr').value;        
