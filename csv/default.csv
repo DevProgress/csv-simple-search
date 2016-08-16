@@ -1,6 +1,8 @@
 "State","City","Type","Name","Diversity","Website","Phone #","Source"
 "NY","New York","Open Source Community","DevProgress","MBE Certified","http://devprogress.us","(555)555-5555","DevProgress.us"
 "NV","Las Vegas","Catering","Lucky's Tasty Viddles","☃","http://luckystastyviddl.es","(777)777-7777","DNC"
+"NV","Las Vegas","Flowers","Lucky's Fancy Flowers","","http://luckysfancyflower.es","(888)888-8888","DNC"
+"NV","Las Vegas","Flowers","Flowers Deluxe LLC","WBE","http://flowersdelux.es","(999)999-9999","DNC"
 "CA","Sacramento","Catering","Pizza Pie Guys","","http://pizzapieguys.pie","(213)424-7700","decause"
 "NC","Raleigh","Flowers","Rollywood Florists","MBE Certfied","http://RollywoodFlowers.com","(123)456-7890","HfA"
 "XX","CloudCity","LightSabers","Landoland","","http://lando.land","(999)999-9999","Han"
