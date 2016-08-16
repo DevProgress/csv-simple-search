@@ -3,3 +3,6 @@ tmp
 node_modules
 dist
 errorShots
+.npm-debug.log
+.eslintcache
+.orig

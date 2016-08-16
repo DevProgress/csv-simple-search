@@ -43,3 +43,7 @@ body {
 .wrap {
   word-wrap: break-word;
 }
+
+.react-spinner_bar {
+  background-color: black;
+}
