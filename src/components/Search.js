@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 const propTypes = {
   data: React.PropTypes.array.isRequired,
-  onFilteredData: React.PropTypes.func.isRequired
+  onFilteredData: React.PropTypes.func.isRequired,
 };
 
 export default class Search extends React.Component {
@@ -21,9 +21,9 @@ export default class Search extends React.Component {
   }
 
   render() {
-    return <div>
+    return (<div>
       <input className="form-control" placeholder="Enter a Keyword, City, or State" onChange={this.onChange.bind(this)} />
-    </div>;
+    </div>);
   }
 }
 

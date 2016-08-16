@@ -4,5 +4,5 @@
 module.exports = require('./webpack.make')({
   BUILD: false,
   TEST: false,
-  ENVIRONMENT: 'development'
-})
+  ENVIRONMENT: 'development',
+});

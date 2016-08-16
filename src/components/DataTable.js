@@ -6,7 +6,7 @@ export default class DataTable extends React.Component {
     super(props);
     this.state = {
       page: 0,
-      wide: false
+      wide: false,
     };
     this.resize = this.resize.bind(this);
   }
@@ -16,54 +16,54 @@ export default class DataTable extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize)
+    window.addEventListener('resize', this.resize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize)
-  }  
+    window.removeEventListener('resize', this.resize);
+  }
 
   prevPage() {
     let prev = this.state.page - 1;
     this.setState({
-      page: prev < 0 ? 0 : prev
+      page: prev < 0 ? 0 : prev,
     });
   }
 
   nextPage() {
-    let props  = this.props,
-        limit  = props.limit,
-        length = props.values.length,
-        page = this.state.page,
-        next = page + 1;
+    let props = this.props,
+      limit = props.limit,
+      length = props.values.length,
+      page = this.state.page,
+      next = page + 1;
 
     this.setState({
-      page: next >= Math.ceil(length / limit) ? page : next
+      page: next >= Math.ceil(length / limit) ? page : next,
     });
   }
 
   render() {
     let props = this.props,
-        length = props.values.length,
-        limit = props.limit,
-        page  = this.state.page,
-        start = page * limit,
-        end = start + limit,
-        values  = props.values.slice(start, end),
-        columns = Object.keys(values[0] || {}),
-        standardColumnWidth = 100,
-        wide = (columns.length * standardColumnWidth < window.innerWidth);
+      length = props.values.length,
+      limit = props.limit,
+      page = this.state.page,
+      start = page * limit,
+      end = start + limit,
+      values = props.values.slice(start, end),
+      columns = Object.keys(values[0] || {}),
+      standardColumnWidth = 100,
+      wide = (columns.length * standardColumnWidth < window.innerWidth);
 
     return (
       <div>
         <table className={'table table-responsive ' + (wide ? styles.wide : styles.narrow)}>
           {(() => {
             if (wide) {
-              return <thead>
+              return (<thead>
                 <tr>
                   {columns.map((col, i) => <th key={i}>{col}</th>)}
                 </tr>
-              </thead>;
+              </thead>);
             }
           })()}
 
@@ -85,11 +85,11 @@ export default class DataTable extends React.Component {
           </li>
         </ul>
       </div>
-    )
+    );
   }
 }
 
 DataTable.propTypes = {
   limit: React.PropTypes.number.isRequired,
-  values: React.PropTypes.array.isRequired
+  values: React.PropTypes.array.isRequired,
 };
