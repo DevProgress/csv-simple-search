@@ -153,7 +153,7 @@ module.exports = function makeWebpackConfig(options) {
 
   // JSX LOADER
   // Transpile .jsx files using babel-loader
-  var jsxLoader = {
+  const jsxLoader = {
     test: /\.(js|jsx)$/,
     loader: 'babel',
     exclude: [
@@ -179,7 +179,7 @@ module.exports = function makeWebpackConfig(options) {
   //
   // Reference: https://github.com/postcss/postcss-loader
   // Postprocess your css with PostCSS plugins
-  var cssLoader = {
+  const cssLoader = {
     test: /\.css$/,
     loader: 'style!css' + (BUILD ? '' : '') + '!autoprefixer?browsers=last 2 version',
   };
@@ -225,7 +225,8 @@ module.exports = function makeWebpackConfig(options) {
 
     // Reference: https://www.npmjs.com/package/html-webpack-plugin
     // Uses index.html as template, appends scripts/css, and moves to templates/app
-    // Note: npm dev script needs to run webpack regularly the first time to make sure this file actually gets emitted to the file system rather than kept in memory
+    // Note: npm dev script needs to run webpack regularly the first time to make sure this file
+    // actually gets emitted to the file system rather than kept in memory
     new HtmlWebpackPlugin({
       template: './src/index.html',
       inject: 'body',

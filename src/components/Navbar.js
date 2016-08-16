@@ -15,14 +15,14 @@ export default class Navbar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-fixed-top">
-  		  <div className="container">
-  		    <div className="navbar-header">
-  		      <a className="navbar-brand" href="#">
-  		      	<img className="img-responsive" src={logoURL} alt="" />
-  		      </a>
-  		    </div>
-  		  </div>
-  		</nav>
+        <div className="container">
+          <div className="navbar-header">
+            <a className="navbar-brand">
+              <img className="img-responsive" src={logoURL} alt="" />
+            </a>
+          </div>
+        </div>
+      </nav>
     );
   }
 }

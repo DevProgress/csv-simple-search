@@ -11,10 +11,6 @@ export default class DataTable extends React.Component {
     this.resize = this.resize.bind(this);
   }
 
-  resize() {
-    this.forceUpdate();
-  }
-
   componentDidMount() {
     window.addEventListener('resize', this.resize);
   }
@@ -23,19 +19,23 @@ export default class DataTable extends React.Component {
     window.removeEventListener('resize', this.resize);
   }
 
+  resize() {
+    this.forceUpdate();
+  }
+
   prevPage() {
-    let prev = this.state.page - 1;
+    const prev = this.state.page - 1;
     this.setState({
       page: prev < 0 ? 0 : prev,
     });
   }
 
   nextPage() {
-    let props = this.props,
-      limit = props.limit,
-      length = props.values.length,
-      page = this.state.page,
-      next = page + 1;
+    const props = this.props;
+    const limit = props.limit;
+    const length = props.values.length;
+    const page = this.state.page;
+    const next = page + 1;
 
     this.setState({
       page: next >= Math.ceil(length / limit) ? page : next,
@@ -43,16 +43,16 @@ export default class DataTable extends React.Component {
   }
 
   render() {
-    let props = this.props,
-      length = props.values.length,
-      limit = props.limit,
-      page = this.state.page,
-      start = page * limit,
-      end = start + limit,
-      values = props.values.slice(start, end),
-      columns = Object.keys(values[0] || {}),
-      standardColumnWidth = 100,
-      wide = (columns.length * standardColumnWidth < window.innerWidth);
+    const props = this.props;
+    const length = props.values.length;
+    const limit = props.limit;
+    const page = this.state.page;
+    const start = page * limit;
+    const end = start + limit;
+    const values = props.values.slice(start, end);
+    const columns = Object.keys(values[0] || {});
+    const standardColumnWidth = 100;
+    const wide = (columns.length * standardColumnWidth < window.innerWidth);
 
     return (
       <div>
@@ -65,12 +65,17 @@ export default class DataTable extends React.Component {
                 </tr>
               </thead>);
             }
+            return undefined;
           })()}
 
           <tbody>
             {values.map((val, i) => (
               <tr key={i}>
-                {columns.map((col, j) => <td key={j}>{wide ? '' : <span>{col + ':'}</span>} {val[col]}</td>)}
+                {columns.map((col, j) => (
+                  <td key={j}>
+                    {wide ? '' : <span>{col + ':'}</span>} {val[col]}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>

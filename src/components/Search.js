@@ -7,22 +7,22 @@ const propTypes = {
 };
 
 export default class Search extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   onChange(e) {
-    var value = e.target.value;
-    this.props.onFilteredData(_.filter(this.props.data, function (row) {
-      return _.find(_.values(row), function (val) {
-        return (val.toString().toLowerCase()).indexOf(value.toLowerCase()) !== -1;
-      });
-    }));
+    const value = e.target.value;
+    this.props.onFilteredData(_.filter(this.props.data, (row) =>
+      _.find(_.values(row), (val) =>
+        (val.toString().toLowerCase()).indexOf(value.toLowerCase()) !== -1
+      )
+    ));
   }
 
   render() {
     return (<div>
-      <input className="form-control" placeholder="Enter a Keyword, City, or State" onChange={this.onChange.bind(this)} />
+      <input
+        className="form-control"
+        placeholder="Enter a Keyword, City, or State"
+        onChange={this.onChange.bind(this)}
+      />
     </div>);
   }
 }
