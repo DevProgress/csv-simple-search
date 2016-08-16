@@ -6,9 +6,14 @@
   "scripts": {
     "build": "webpack --config webpack.build.js --bail -p",
     "dev": "webpack & webpack-dev-server --config webpack.config.js --history-api-fallback --hot --inline --progress",
+<<<<<<< HEAD
     "test-ui": "./node_modules/.bin/wdio",
+    "deploy": "gh-pages -d dist"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "gh-pages -d dist",
     "lint": "eslint . --cache"
+>>>>>>> master
   },
   "private": true,
   "dependencies": {
