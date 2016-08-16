@@ -12,15 +12,18 @@ export default class Search extends React.Component {
   }
 
   onChange(e) {
-    var value = e.target.value;
-    var keywords = e.target.value.split(' ');
+    const value = e.target.value,
+          keywords = e.target.value.toLowerCase().split(' ');
+
     this.props.onFilteredData(_.filter(this.props.data, function (row) {
-      var values = _.values(row);
-      var words = _.join(values, ' ');
-      var matches = _.map(keywords, function(keyword){ 
+      const values = _.values(row);
+      const words = _.join(values, ' ').toLowerCase();
+
+      const matches = _.map(keywords, function(keyword){ 
         return _.includes(words, keyword);
       });
-      return !(_.includes(matches, false));
+
+      return _.every(matches);
     }));
   }
 
