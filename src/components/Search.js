@@ -10,7 +10,7 @@ export default class Search extends React.Component {
 
   onChange(e) {
     const keywords = e.target.value.toLowerCase().split(' ');
-    this.props.onFilteredData(_.filter(this.props.data, function (row) {
+    this.props.onFilteredData(_.filter(this.props.data, row => {
       const values = _.values(row);
       const words = _.join(values, ' ').toLowerCase();
       return _.every(keywords, keyword => _.includes(words, keyword));
