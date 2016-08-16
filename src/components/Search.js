@@ -7,13 +7,16 @@ const propTypes = {
 };
 
 export default class Search extends React.Component {
+  
   onChange(e) {
-    const value = e.target.value;
-    this.props.onFilteredData(_.filter(this.props.data, (row) =>
-      _.find(_.values(row), (val) =>
-        (val.toString().toLowerCase()).indexOf(value.toLowerCase()) !== -1
-      )
-    ));
+    const value = e.target.value,
+          keywords = e.target.value.toLowerCase().split(' ');
+
+    this.props.onFilteredData(_.filter(this.props.data, function (row) {
+      const values = _.values(row);
+      const words = _.join(values, ' ').toLowerCase();
+      return _.every(keywords, keyword => _.includes(words, keyword))
+    }));
   }
 
   render() {
