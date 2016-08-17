@@ -121,21 +121,23 @@ export default class MainView extends React.Component {
     return (
       <div>
         <Navbar />
-        {(() => {
-          if (!this.state.data) {
-            return <Spinner />;
-          }
-          return (<main className="container">
-            <div className={'row ' + (isError ? '' : 'hidden')}>
-              <div className="col-sm-12">
-                <div className="alert alert-danger alert-dismissible" role="alert">
-                  <strong>Oh snap!</strong>
-                  We had some issues resolving the data source
-                  <a className="wrap" href={dataSource}>{dataSource}</a>.
+        <main className="container">
+          {(() => {
+            if (isError) {
+              return (<div className="row">
+                <div className="col-sm-12">
+                  <div className="alert alert-danger alert-dismissible" role="alert">
+                    <strong>Oh snap!</strong> We
+                    had some issues resolving the data
+                    source: <a className="wrap" href={dataSource}>{dataSource}</a>.
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="row">
+              </div>);
+            }
+            if (!this.state.data) {
+              return <div className="row"><Spinner /></div>;
+            }
+            return (<div className="row">
               <div className="col-sm-12">
                 <div className="row">
                   <div className="col-xs-8 col-sm-4">
@@ -155,9 +157,9 @@ export default class MainView extends React.Component {
                   </div>
                 </div>
               </div>
-            </div>
-          </main>);
-        })()}
+            </div>);
+          })()}
+        </main>
       </div>
     );
   }
