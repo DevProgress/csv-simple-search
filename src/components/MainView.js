@@ -1,8 +1,8 @@
 import React from 'react';
-import Papa  from 'papaparse';
+import Papa from 'papaparse';
 import Navbar from './Navbar';
 import DataTable from './DataTable';
-import Search from './Search'
+import Search from './Search';
 import '../styles.css';
 
 
@@ -14,88 +14,90 @@ export default class MainView extends React.Component {
 
   constructor(props) {
     super(props);
-    let data = [];
+    const data = [];
     this.state = {
-      data: data,
+      data,
       filteredData: data,
       dataSource: '',
-      isError: false
+      isError: false,
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.import();
   }
 
-  getQueryStringParam(name){
+  getQueryStringParam(name) {
     let value = null;
-    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
     const results = regex.exec(window.location.href);
     if (results) {
-      value = decodeURIComponent(results[2].replace(/\+/g, " "));
+      value = decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
     return value;
   }
 
-  getExternalFileUrl(){
+  getExternalFileUrl() {
     return this.getQueryStringParam('externalFileUrl');
-  }  
+  }
 
-  getLocalFileName(){
+  getLocalFileName() {
     let file = this.getQueryStringParam('file');
-    if (!file){
+    if (!file) {
       file = 'default.csv';
     }
     return file;
   }
 
   import() {
-
-    const localFolder = './csv/'
+    const localFolder = './csv/';
     const localFileName = this.getLocalFileName();
     let path = localFolder + localFileName;
 
     const externalFileUrl = this.getExternalFileUrl();
-    if (externalFileUrl){
+    if (externalFileUrl) {
       path = externalFileUrl;
     }
 
     this.setState({
-      dataSource: path
+      dataSource: path,
     });
 
     Papa.parse(path, {
-        download: true,
-        header: true,
-        dynamicTyping: true,
-        complete: function(results) {
-          this.parseCSV(results);
-        }.bind(this),
-        error: function(err, file, inputElem, reason)
-        {
-          this.setState({
-            isError: true
-          });
-        }.bind(this),
+      download: true,
+      header: true,
+      dynamicTyping: true,
+      complete: results => {
+        this.parseCSV(results);
+      },
+      error: () => {
+        this.setState({
+          isError: true,
+        });
+      },
     });
   }
 
   parseCSV(results) {
     this.setState({
       data: results.data,
-      filteredData: results.data
+      filteredData: results.data,
     });
   }
 
   export(json) {
-    let filename = "data.csv",
-        csv = Papa.unparse(json),
-        blob = new Blob([csv], {type: 'text/csv'});
+    const filename = 'data.csv';
+    const csv = Papa.unparse(json);
+    const blob = new Blob([csv], { type: 'text/csv' });
+
     if (window.navigator.msSaveOrOpenBlob) {
       window.navigator.msSaveBlob(blob, filename);
-    } else {
-      let a = window.document.createElement("a");
-      a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
+    }
+    else {
+      const a = window.document.createElement('a');
+      a.href = window.URL.createObjectURL(blob, {
+        type: 'text/plain',
+      });
       a.download = filename;
       document.body.appendChild(a);
       a.click();
@@ -105,46 +107,51 @@ export default class MainView extends React.Component {
 
   filterData(data) {
     this.setState({
-      filteredData: data
+      filteredData: data,
     });
   }
 
   render() {
-    const data = this.state.data,
-      filteredData = this.state.filteredData,
-      dataSource = encodeURI(this.state.dataSource),
-      isError = this.state.isError
-    
+    const data = this.state.data;
+    const filteredData = this.state.filteredData;
+    const dataSource = encodeURI(this.state.dataSource);
+    const isError = this.state.isError;
+
     return (
       <div>
         <Navbar />
-    		<main className="container">
-          <div className={"row " + (isError ? '' : 'hidden')}>
+        <main className="container">
+          <div className={'row ' + (isError ? '' : 'hidden')}>
             <div className="col-sm-12">
               <div className="alert alert-danger alert-dismissible" role="alert">
-                <strong>Oh snap!</strong> We had some issues resolving the data source <a className="wrap" href={dataSource}>{dataSource}</a>.
-              </div>  
-            </div>          
+                <strong>Oh snap!</strong>
+                We had some issues resolving the data source
+                <a className="wrap" href={dataSource}>{dataSource}</a>.
+              </div>
+            </div>
           </div>
-    			<div className="row">
-    				<div className="col-sm-12">
-            <div className="row">
-              <div className="col-xs-8 col-sm-4">
-                <Search data={data} onFilteredData={this.filterData.bind(this)} />
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="row">
+                <div className="col-xs-8 col-sm-4">
+                  <Search data={data} onFilteredData={this.filterData.bind(this)} />
+                </div>
+                <div className="col-xs-4 pull-right">
+                  <a
+                    className="btn btn-primary pull-right"
+                    onClick={this.export.bind(this, filteredData)}
+                  >Export to CSV</a>
+                </div>
               </div>
-              <div className="col-xs-4 pull-right">
-                <a className="btn btn-primary pull-right" onClick={this.export.bind(this, filteredData)}>Export to CSV</a>
+              <hr />
+              <div className="row">
+                <div className="col-xs-12">
+                  <DataTable limit={20} values={filteredData} />
+                </div>
               </div>
             </div>
-            <hr/>
-            <div className="row">
-              <div className="col-xs-12">
-                <DataTable limit={20} values={filteredData} />
-              </div>
-            </div>
-    				</div>
-    			</div>
-    		</main>
+          </div>
+        </main>
       </div>
     );
   }
