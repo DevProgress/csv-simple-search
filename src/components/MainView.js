@@ -125,8 +125,7 @@ export default class MainView extends React.Component {
             <div className="col-sm-12">
               <div className="alert alert-danger alert-dismissible" role="alert">
                 <strong>Oh snap!</strong>
-                We had some issues resolving the data source
-                <a className="wrap" href={dataSource}>{dataSource}</a>.
+                We had some issues resolving the data source {dataSource}.
               </div>
             </div>
           </div>
