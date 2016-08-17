@@ -77,7 +77,7 @@ module.exports = function makeWebpackConfig(options) {
       // Filename for non-entry points
       // Only adds hash in build mode
       chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
-    }
+    };
   }
 
   /**
@@ -114,27 +114,27 @@ module.exports = function makeWebpackConfig(options) {
       // Pass along the updated reference to your code
       // You can add here any file extension you want to get copied to your output
       test: /\.(ttf|eot|otf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: 'file'
+      loader: 'file',
     },
     {
       // similar to file loader but can inline small files: https://github.com/webpack/url-loader
       test: /\.(png|jpg|jpeg|gif)$/,
-      loader: 'url?limit=8192' // inlines if <8k
+      loader: 'url?limit=8192', // inlines if <8k
     },
     {
       test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: "url-loader?limit=10000&mimetype=application/font-woff"
+      loader: 'url-loader?limit=10000&mimetype=application/font-woff',
     },
     {
       test: /\.json$/,
-      loader: "json-loader"
+      loader: 'json-loader',
     },
     {
       // Allow us to load CSV files as strings.
       test: /\.csv$/,
-      loader: "raw-loader"
-    }
-  ]}
+      loader: 'raw-loader',
+    },
+  ] };
 
   // ISPARTA LOADER
   // Reference: https://github.com/ColCh/isparta-instrumenter-loader
@@ -145,31 +145,31 @@ module.exports = function makeWebpackConfig(options) {
       test: /\.(js|jsx)$/,
       exclude: [
         /node_modules/,
-        /\.test\.(js|jsx)$/
+        /\.test\.(js|jsx)$/,
       ],
-      loader: 'isparta-instrumenter'
-    })
+      loader: 'isparta-instrumenter',
+    });
   }
 
   // JSX LOADER
   // Transpile .jsx files using babel-loader
-  var jsxLoader = {
+  const jsxLoader = {
     test: /\.(js|jsx)$/,
     loader: 'babel',
     exclude: [
       /node_modules/,
     ],
-  }
+  };
 
   // Add react-hot-loader when not in build or test mode
   if (!BUILD && !TEST) {
     // Reference: https://github.com/gaearon/react-hot-loader
     // This will reload react components without refresh
-    jsxLoader.loader = 'react-hot!' + jsxLoader.loader
+    jsxLoader.loader = 'react-hot!' + jsxLoader.loader;
   }
 
   // Add jsxLoader to the loader list
-  config.module.loaders.push(jsxLoader)
+  config.module.loaders.push(jsxLoader);
 
   // Stylesheets
   // Reference: http://webpack.github.io/docs/stylesheets.html
@@ -179,20 +179,20 @@ module.exports = function makeWebpackConfig(options) {
   //
   // Reference: https://github.com/postcss/postcss-loader
   // Postprocess your css with PostCSS plugins
-  var cssLoader = {
+  const cssLoader = {
     test: /\.css$/,
-    loader: 'style!css' + (BUILD ? '' : '') + '!autoprefixer?browsers=last 2 version'
-  }
+    loader: 'style!css' + (BUILD ? '' : '') + '!autoprefixer?browsers=last 2 version',
+  };
 
   // Skip loading css in test mode
   if (TEST) {
     // Reference: https://github.com/webpack/null-loader
     // Return an empty module
-    cssLoader.loader = 'null'
+    cssLoader.loader = 'null';
   }
 
   // Add cssLoader to the loader list
-  config.module.loaders.push(cssLoader)
+  config.module.loaders.push(cssLoader);
 
   /**
    * Plugins
@@ -220,18 +220,19 @@ module.exports = function makeWebpackConfig(options) {
     // Reference: http://webpack.github.io/docs/list-of-plugins.html#defineplugin
     // Can be used to replace other values as well
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(ENVIRONMENT) // see: https://github.com/petehunt/webpack-howto for a trick for hiding dev and pre-release features
+      'process.env.NODE_ENV': JSON.stringify(ENVIRONMENT), // see: https://github.com/petehunt/webpack-howto for a trick for hiding dev and pre-release features
     }),
 
     // Reference: https://www.npmjs.com/package/html-webpack-plugin
     // Uses index.html as template, appends scripts/css, and moves to templates/app
-    // Note: npm dev script needs to run webpack regularly the first time to make sure this file actually gets emitted to the file system rather than kept in memory
+    // Note: npm dev script needs to run webpack regularly the first time to make sure this file
+    // actually gets emitted to the file system rather than kept in memory
     new HtmlWebpackPlugin({
       template: './src/index.html',
       inject: 'body',
-      filename: 'index.html'
-    })
-  ]
+      filename: 'index.html',
+    }),
+  ];
 
   // Skip rendering index.html in test mode
   // if (!TEST) {
@@ -256,7 +257,7 @@ module.exports = function makeWebpackConfig(options) {
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
       new webpack.optimize.UglifyJsPlugin()
-    )
+    );
   }
 
   /**
