@@ -3,6 +3,8 @@ import Papa from 'papaparse';
 import Navbar from './Navbar';
 import DataTable from './DataTable';
 import Search from './Search';
+import Spinner from 'react-spinner';
+import 'react-spinner/react-spinner.css';
 import '../styles.css';
 
 
@@ -14,10 +16,9 @@ export default class MainView extends React.Component {
 
   constructor(props) {
     super(props);
-    const data = [];
     this.state = {
-      data,
-      filteredData: data,
+      data: undefined,
+      filteredData: undefined,
       dataSource: '',
       isError: false,
     };
@@ -121,35 +122,42 @@ export default class MainView extends React.Component {
       <div>
         <Navbar />
         <main className="container">
-          <div className={'row ' + (isError ? '' : 'hidden')}>
-            <div className="col-sm-12">
-              <div className="alert alert-danger alert-dismissible" role="alert">
-                <strong>Oh snap!</strong>
-                We had some issues resolving the data source {dataSource}.
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-12">
-              <div className="row">
-                <div className="col-xs-8 col-sm-4">
-                  <Search data={data} onFilteredData={this.filterData.bind(this)} />
+          {(() => {
+            if (isError) {
+              return (<div className="row">
+                <div className="col-sm-12">
+                  <div className="alert alert-danger alert-dismissible" role="alert">
+                    <strong>Oh snap!</strong> We had some issues resolving the data
+                    source: {dataSource}.
+                  </div>
                 </div>
-                <div className="col-xs-4 pull-right">
-                  <a
-                    className="btn btn-primary pull-right"
-                    onClick={this.export.bind(this, filteredData)}
-                  >Export to CSV</a>
+              </div>);
+            }
+            if (!this.state.data) {
+              return <div className="row"><Spinner /></div>;
+            }
+            return (<div className="row">
+              <div className="col-sm-12">
+                <div className="row">
+                  <div className="col-xs-8 col-sm-4">
+                    <Search data={data} onFilteredData={this.filterData.bind(this)} />
+                  </div>
+                  <div className="col-xs-4 pull-right">
+                    <a
+                      className="btn btn-primary pull-right"
+                      onClick={this.export.bind(this, filteredData)}
+                    >Export to CSV</a>
+                  </div>
+                </div>
+                <hr />
+                <div className="row">
+                  <div className="col-xs-12">
+                    <DataTable limit={20} values={filteredData} />
+                  </div>
                 </div>
               </div>
-              <hr />
-              <div className="row">
-                <div className="col-xs-12">
-                  <DataTable limit={20} values={filteredData} />
-                </div>
-              </div>
-            </div>
-          </div>
+            </div>);
+          })()}
         </main>
       </div>
     );
