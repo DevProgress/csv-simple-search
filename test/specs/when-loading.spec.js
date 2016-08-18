@@ -1,14 +1,15 @@
-/* eslint-disable prefer-arrow-callback */
+/* eslint prefer-arrow-callback: ["error", { "allowNamedFunctions": true }] */
+
 const assert = require('assert');
 
-describe('When loading', function describe() {
-  it('should have the right title', function it() {
+describe('When loading', () => {
+  it('should have the right title', () => {
     browser.url('/');
     const title = browser.getTitle();
     assert(title === 'CSV Search');
   });
 
-  it('should load local csv file', () => function it() {
+  it('should load local csv file', () => {
     browser.url('/?file=selenium-test-data.csv');
     browser.waitUntil(function wait() {
       return !!browser.element('table').value;
@@ -17,7 +18,7 @@ describe('When loading', function describe() {
     assert(rows.length > 1);
   });
 
-  it('should load external csv file', function it() {
+  it('should load external csv file', () => {
     browser.url('/?externalFileUrl=http://devprogress.us/csv-simple-search/csv/selenium-test-data.csv');
     browser.waitUntil(function wait() {
       return !!browser.element('table').value;
@@ -26,7 +27,7 @@ describe('When loading', function describe() {
     assert(rows.length > 1);
   });
 
-  it('should show alert with invalid local file', function it() {
+  it('should show alert with invalid local file', () => {
     browser.url('/?file=xxx.csv');
     browser.waitUntil(function wait() {
       return !!browser.element('.alert').value;
