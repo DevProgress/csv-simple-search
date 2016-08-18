@@ -9,7 +9,7 @@ describe('When loading', function describe() {
   });
 
   it('should load local csv file', () => function it() {
-    browser.url('/?file=abc.csv');
+    browser.url('/?file=selenium-test-data.csv');
     browser.waitUntil(function wait() {
       return !!browser.element('table').value;
     }, 10000);
@@ -18,7 +18,7 @@ describe('When loading', function describe() {
   });
 
   it('should load external csv file', function it() {
-    browser.url('/?externalFileUrl=http://devprogress.us/csv-simple-search/csv/abc.csv');
+    browser.url('/?externalFileUrl=http://devprogress.us/csv-simple-search/csv/selenium-test-data.csv');
     browser.waitUntil(function wait() {
       return !!browser.element('table').value;
     }, 10000);
