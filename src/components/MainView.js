@@ -6,6 +6,7 @@ import Search from './Search';
 import Spinner from 'react-spinner';
 import 'react-spinner/react-spinner.css';
 import '../styles.css';
+import Package from '../../package.json';
 
 
 const propTypes = {
@@ -21,6 +22,7 @@ export default class MainView extends React.Component {
       filteredData: undefined,
       dataSource: '',
       isError: false,
+      version: Package.version,
     };
   }
 
@@ -117,6 +119,7 @@ export default class MainView extends React.Component {
     const filteredData = this.state.filteredData;
     const dataSource = encodeURI(this.state.dataSource);
     const isError = this.state.isError;
+    const version = this.state.version;
 
     return (
       <div>
@@ -158,6 +161,7 @@ export default class MainView extends React.Component {
               </div>
             </div>);
           })()}
+          <div>Version: <span>{version}</span></div>
         </main>
       </div>
     );
