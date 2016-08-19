@@ -1,6 +1,6 @@
 {
   "name": "csv-simple-search",
-  "version": "1.0.107",
+  "version": "1.0.0",
   "description": "Searchable, exportable CSV viewer",
   "main": "./src/index.js",
   "scripts": {
