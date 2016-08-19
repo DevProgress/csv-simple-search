@@ -35,8 +35,8 @@ module.exports = function makeWebpackConfig(options) {
    * This is the object where all configuration gets set
    */
   const config = {};
-  const packedDate = { date: new Date().toISOString() };
-  fs.writeFile('packed.json', JSON.stringify(packedDate));
+  const packDate = { date: new Date().toISOString() };
+  fs.writeFile('webpack.date.json', JSON.stringify(packDate));
   /**
    * Entry
    * Reference: http://webpack.github.io/docs/configuration.html#entry
