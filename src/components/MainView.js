@@ -22,6 +22,7 @@ export default class MainView extends React.Component {
       dataSource: '',
       isError: false,
     };
+    this.filterData = this.filterData.bind(this);
   }
 
   componentDidMount() {
@@ -140,7 +141,7 @@ export default class MainView extends React.Component {
               <div className="col-sm-12">
                 <div className="row">
                   <div className="col-xs-8 col-sm-4">
-                    <Search data={data} onFilteredData={this.filterData.bind(this)} />
+                    <Search data={data} onFilteredData={this.filterData} />
                   </div>
                   <div className="col-xs-4 pull-right">
                     <a
