@@ -6,3 +6,4 @@ errorShots
 npm-debug.log
 .eslintcache
 .orig
+webpack.date.json

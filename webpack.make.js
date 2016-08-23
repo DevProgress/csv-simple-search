@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const WebpackCleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const fs = require('fs');
 
 /**
  * Make webpack config
@@ -34,7 +35,8 @@ module.exports = function makeWebpackConfig(options) {
    * This is the object where all configuration gets set
    */
   const config = {};
-
+  const packDate = { date: new Date().toISOString() };
+  fs.writeFile('webpack.date.json', JSON.stringify(packDate));
   /**
    * Entry
    * Reference: http://webpack.github.io/docs/configuration.html#entry

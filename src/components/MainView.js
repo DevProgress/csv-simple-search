@@ -6,6 +6,7 @@ import Search from './Search';
 import Spinner from 'react-spinner';
 import 'react-spinner/react-spinner.css';
 import '../styles.css';
+import WebpackDate from '../../webpack.date.json';
 
 
 const propTypes = {
@@ -21,6 +22,7 @@ export default class MainView extends React.Component {
       filteredData: undefined,
       dataSource: '',
       isError: false,
+      packdate: WebpackDate.date,
     };
     this.filterData = this.filterData.bind(this);
   }
@@ -118,6 +120,7 @@ export default class MainView extends React.Component {
     const filteredData = this.state.filteredData;
     const dataSource = encodeURI(this.state.dataSource);
     const isError = this.state.isError;
+    const packdate = this.state.packdate;
 
     return (
       <div>
@@ -159,6 +162,7 @@ export default class MainView extends React.Component {
               </div>
             </div>);
           })()}
+          <small>Packed: <span>{packdate}</span></small>
         </main>
       </div>
     );
