@@ -9,6 +9,8 @@ export default class DataTable extends React.Component {
       wide: false,
     };
     this.resize = this.resize.bind(this);
+    this.prevPage = this.prevPage.bind(this);
+    this.nextPage = this.nextPage.bind(this);
   }
 
   componentDidMount() {
@@ -91,10 +93,10 @@ export default class DataTable extends React.Component {
 
         <ul className="pager">
           <li className={page === 0 ? 'disabled' : ''}>
-            <a onClick={this.prevPage.bind(this)}>Previous</a>
+            <a onClick={this.prevPage}>Previous</a>
           </li>
           <li className={page + 1 >= Math.ceil(length / limit) ? 'disabled' : 0}>
-            <a onClick={this.nextPage.bind(this)}>Next</a>
+            <a onClick={this.nextPage}>Next</a>
           </li>
         </ul>
       </div>
