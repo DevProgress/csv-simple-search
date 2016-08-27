@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-  background: #FAFAFA;
+  background: #fff;
   font-family: "Source Sans Pro";
 }
 
@@ -26,7 +26,7 @@ body {
 }
 
 .navbar {
-  background: #fff;
+  background: #0057B8;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   margin: 0;
 }
@@ -46,4 +46,12 @@ body {
 
 .react-spinner_bar {
   background-color: black;
+}
+
+thead {
+  background-color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #f7f7f7;
 }
