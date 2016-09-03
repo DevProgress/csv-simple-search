@@ -8,22 +8,13 @@ export default class DataTable extends React.Component {
       page: 0,
       wide: false,
       sort: {
-        column: '',
+        column: props.headers[0],
         order: 'asc',
       },
     };
     this.resize = this.resize.bind(this);
     this.prevPage = this.prevPage.bind(this);
     this.nextPage = this.nextPage.bind(this);
-  }
-
-  componentWillMount() {
-    this.setState({
-      sort: {
-        column: this.props.headers[0],
-        order: 'asc',
-      },
-    });
   }
 
   componentDidMount() {
