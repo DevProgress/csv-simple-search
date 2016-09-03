@@ -107,13 +107,12 @@ export default class DataTable extends React.Component {
 
   render() {
     const props = this.props;
-    let values = this.sortRows(props.values);
     const length = props.values.length;
     const limit = props.limit;
     const page = this.state.page;
     const start = page * limit;
     const end = start + limit;
-    values = values.slice(start, end);
+    const values = this.sortRows(props.values).slice(start, end);
     const columns = props.headers;
     const standardColumnWidth = 100;
     const wide = (columns.length * standardColumnWidth < window.innerWidth);

@@ -83,8 +83,7 @@ export default class MainView extends React.Component {
   }
 
   parseCSV(results) {
-    let rowData = results.data;
-    rowData = rowData.filter((d) => Object.keys(d).length > 1);
+    const rowData = results.data.filter((d) => Object.keys(d).length > 1);
     this.setState({
       data: rowData,
       filteredData: rowData,
