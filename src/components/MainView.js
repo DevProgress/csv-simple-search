@@ -83,9 +83,12 @@ export default class MainView extends React.Component {
   }
 
   parseCSV(results) {
+    let rowData = results.data;
+    rowData = rowData.filter((d) => Object.keys(d).length > 1);
     this.setState({
-      data: results.data,
-      filteredData: results.data,
+      data: rowData,
+      filteredData: rowData,
+      headers: Object.keys(rowData[0] || {}),
     });
   }
 
@@ -117,6 +120,7 @@ export default class MainView extends React.Component {
 
   render() {
     const data = this.state.data;
+    const headers = this.state.headers;
     const filteredData = this.state.filteredData;
     const dataSource = encodeURI(this.state.dataSource);
     const isError = this.state.isError;
@@ -156,7 +160,7 @@ export default class MainView extends React.Component {
                 <hr />
                 <div className="row">
                   <div className="col-xs-12">
-                    <DataTable limit={20} values={filteredData} />
+                    <DataTable limit={20} values={filteredData} headers={headers} />
                   </div>
                 </div>
               </div>

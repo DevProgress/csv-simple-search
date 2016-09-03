@@ -7,10 +7,23 @@ export default class DataTable extends React.Component {
     this.state = {
       page: 0,
       wide: false,
+      sort: {
+        column: '',
+        order: 'asc',
+      },
     };
     this.resize = this.resize.bind(this);
     this.prevPage = this.prevPage.bind(this);
     this.nextPage = this.nextPage.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({
+      sort: {
+        column: this.props.headers[0],
+        order: 'asc',
+      },
+    });
   }
 
   componentDidMount() {
@@ -27,6 +40,46 @@ export default class DataTable extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
+  }
+
+  setSortState(col) {
+    const { sort } = this.state;
+
+    if (!sort.order) {
+      sort.order = 'asc';
+    }
+    if (sort.order && sort.column === col) {
+      sort.order = sort.order === 'asc' ? 'desc' : 'asc';
+    }
+    else {
+      sort.order = 'asc';
+    }
+
+    sort.column = col;
+    this.setState({ sort });
+  }
+
+  sortByOrder(column, sortOrder) {
+    return (a, b) => {
+      let result;
+      if (a[column] < b[column]) {
+        result = -1;
+      }
+      if (a[column] > b[column]) {
+        result = 1;
+      }
+      if (a[column] === b[column]) {
+        result = 0;
+      }
+      return result * sortOrder;
+    };
+  }
+
+  sortRows(values) {
+    const { sort: { column, order } } = this.state;
+    const sortOrder = order === 'asc' ? 1 : -1;
+    const sortedValues = values.sort(this.sortByOrder(column, sortOrder));
+    return sortedValues;
   }
 
   resize() {
@@ -54,13 +107,14 @@ export default class DataTable extends React.Component {
 
   render() {
     const props = this.props;
+    let values = this.sortRows(props.values);
     const length = props.values.length;
     const limit = props.limit;
     const page = this.state.page;
     const start = page * limit;
     const end = start + limit;
-    const values = props.values.slice(start, end);
-    const columns = Object.keys(values[0] || {});
+    values = values.slice(start, end);
+    const columns = props.headers;
     const standardColumnWidth = 100;
     const wide = (columns.length * standardColumnWidth < window.innerWidth);
 
@@ -69,11 +123,24 @@ export default class DataTable extends React.Component {
         <table className={'table table-responsive ' + (wide ? styles.wide : styles.narrow)}>
           {(() => {
             if (wide) {
-              return (<thead>
-                <tr>
-                  {columns.map((col, i) => <th key={i}>{col}</th>)}
-                </tr>
-              </thead>);
+              return (
+                <thead>
+                  <tr>
+                    {columns.map((col, i) => {
+                      let arrow;
+                      if (col === this.state.sort.column) {
+                        arrow = this.state.sort.order === 'asc' ?
+                          <span>&#8593;</span> : <span>&#8595;</span>;
+                      }
+                      return (
+                        <th key={i} className="table-header" onClick={() => this.setSortState(col)}>
+                          {col} {arrow}
+                        </th>
+                      );
+                    })}
+                  </tr>
+                </thead>
+              );
             }
             return undefined;
           })()}
@@ -81,11 +148,11 @@ export default class DataTable extends React.Component {
           <tbody>
             {values.map((val, i) => (
               <tr key={i}>
-                {columns.map((col, j) => (
+                {columns.map((col, j) =>
                   <td key={j}>
                     {wide ? '' : <span>{col + ':'}</span>} {val[col]}
                   </td>
-                ))}
+                )}
               </tr>
             ))}
           </tbody>
@@ -107,4 +174,5 @@ export default class DataTable extends React.Component {
 DataTable.propTypes = {
   limit: React.PropTypes.number.isRequired,
   values: React.PropTypes.array.isRequired,
+  headers: React.PropTypes.array.isRequired,
 };
