@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './DataTable.css';
+import Linkify from 'react-linkify';
 
 export default class DataTable extends React.Component {
   constructor(props) {
@@ -83,7 +84,9 @@ export default class DataTable extends React.Component {
               <tr key={i}>
                 {columns.map((col, j) => (
                   <td key={j}>
-                    {wide ? '' : <span>{col + ':'}</span>} {val[col]}
+                    <Linkify>
+                      {wide ? '' : <span>{col + ':'}</span>} {val[col]}
+                    </Linkify>
                   </td>
                 ))}
               </tr>
