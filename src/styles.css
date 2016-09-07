@@ -20,6 +20,11 @@ body {
 .table-responsive {
   border: none;
 }
+
+.table-header {
+  cursor: pointer;
+}
+
 .pager li a {
   cursor: pointer;
   display: inline-block;
